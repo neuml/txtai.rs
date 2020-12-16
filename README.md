@@ -1,5 +1,10 @@
 # txtai: AI-powered search engine for Rust
 
+[![Version](https://img.shields.io/github/release/neuml/txtai.rs.svg?style=flat&color=success)](https://github.com/neuml/txtai.rs/releases)
+[![GitHub Release Date](https://img.shields.io/github/release-date/neuml/txtai.rs.svg?style=flat&color=blue)](https://github.com/neuml/txtai.rs/releases)
+[![GitHub issues](https://img.shields.io/github/issues/neuml/txtai.rs.svg?style=flat&color=success)](https://github.com/neuml/txtai.rs/issues)
+[![GitHub last commit](https://img.shields.io/github/last-commit/neuml/txtai.rs.svg?style=flat&color=blue)](https://github.com/neuml/txtai.rs)
+
 [txtai](https://github.com/neuml/txtai) builds an AI-powered index over sections of text. txtai supports building text indices to perform similarity searches and create extractive question-answering based systems. txtai also has functionality for zero-shot classification.
 
 This repository contains Rust bindings for the txtai API. Full txtai functionality is supported.
