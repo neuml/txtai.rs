@@ -1,0 +1,21 @@
+[package]
+name = "txtai"
+version = "1.0.0"
+authors = ["NeuML"]
+license = "Apache-2.0"
+readme = "README.md"
+repository = "https://github.com/neuml/txtai.rs"
+documentation = "https://github.com/neuml/txtai.rs"
+homepage = "https://github.com/neuml/txtai.rs"
+description = """
+Rust bindings for txtai, an AI-powered search engine
+"""
+keywords = ["search", "nlp", "machine-learning", "similarity"]
+categories = ["algorithms", "api-bindings", "text-processing"]
+edition = "2018"
+
+[dependencies]
+reqwest = { version = "0.10", features = ["json"] }
+serde = { version = "1.0", features = ["derive"]}
+serde_json = { version = "1.0" }
+tokio = { version = "0.2", features = ["full"] }
