@@ -23,7 +23,7 @@ The examples directory has a series of examples that give an overview of txtai. 
 |:----------|:-------------|
 | [Introducing txtai](https://github.com/neuml/txtai.rs/blob/master/examples/demo/src/main.rs#L29) | Overview of the functionality provided by txtai |
 | [Extractive QA with txtai](https://github.com/neuml/txtai.rs/blob/master/examples/demo/src/main.rs#L73) | Extractive question-answering with txtai |
-| [Labeling with zero-shot classification](https://github.com/neuml/txtai.rs/blob/master/examples/demo/src/labels.rs#L123) | Labeling with zero-shot classification |
+| [Labeling with zero-shot classification](https://github.com/neuml/txtai.rs/blob/master/examples/demo/src/main.rs#L123) | Labeling with zero-shot classification |
 
 txtai.rs connects to a txtai api instance. See [this link](https://github.com/neuml/txtai#api) for details on how to start a new api instance.
 
