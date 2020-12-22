@@ -76,7 +76,7 @@ impl Embeddings {
     /// 
     /// # Arguments
     /// * `t` - input text
-    pub async fn embeddings(&self, t: &str) -> APIScores {
+    pub async fn embeddings(&self, t: &str) -> APIValues {
         // Query parameters
         let params = [("t", t)];
 
