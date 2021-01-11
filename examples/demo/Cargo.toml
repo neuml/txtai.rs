@@ -10,5 +10,5 @@ txtai demo in Rust
 edition = "2018"
 
 [dependencies]
-txtai = { version = "1.0" }
+txtai = { path = "../../"}
 tokio = { version = "0.2", features = ["full"] }

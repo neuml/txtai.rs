@@ -5,8 +5,6 @@ use std::fmt;
 
 pub use crate::api::API;
 
-pub type APIAnswer = Result<Vec<Answer>, Box<dyn Error>>;
-
 /// Extractor definition
 pub struct Extractor {
     api: API
@@ -24,26 +22,22 @@ impl Extractor {
         }
     }
 
-     /// Extracts answers to input questions
+     /// Extracts answers to input questions.
      /// 
      /// # Arguments
-     /// * `documents` - list of {id: value, text: value}
      /// * `queue` -  list of {name: value, query: value, question: value, snippet: value)
-    pub async fn extract(&self, documents: &Vec<Section>, queue: &Vec<Question>) -> APIAnswer {
+     /// * `texts` - list of texts
+    pub async fn extract(&self, queue: &Vec<Question>, texts: &Vec<&str>) -> Answers {
         // Post parameters
-        let params = json!({"documents": documents, "queue": queue});
+        let params = json!({"queue": queue, "texts": texts});
 
         // Execute API call
         Ok(self.api.post("extract", &params).await?.json().await?)
     }
 }
 
-/// Input section with candidate text for QA process
-#[derive(Debug, Serialize)]
-pub struct Section {
-    pub id: i32,
-    pub text: String
-}
+// Extractor return types
+pub type Answers = Result<Vec<Answer>, Box<dyn Error>>;
 
 /// Input Question
 #[derive(Debug, Serialize)]
@@ -57,12 +51,12 @@ pub struct Question {
 /// Answer response
 #[derive(Debug, Deserialize)]
 pub struct Answer {
-    pub question: String,
+    pub name: String,
     pub answer: String
 }
 
 impl fmt::Display for Answer {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
-        write!(f, "{} {}", self.question, self.answer)
+        write!(f, "{} {}", self.name, self.answer)
     }
 }

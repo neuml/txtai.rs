@@ -1,29 +1,25 @@
 use std::error::Error;
 
-use txtai::extractor::{Extractor, Section, Question};
+use txtai::extractor::{Extractor, Question};
 
 /// Example extractor functionality.
 /// 
-/// Implements logic found in this notebook: https://github.com/neuml/txtai/blob/master/examples/02_Extractive_QA_with_txtai.ipynb
+/// Implements logic found in this notebook: https://github.com/neuml/txtai/blob/master/examples/05_Extractive_QA_with_txtai.ipynb
 pub async fn extractor() -> Result<(), Box<dyn Error>> {
     let extractor = Extractor::new("http://localhost:8000");
 
-    let sections = ["Giants hit 3 HRs to down Dodgers",
-                    "Giants 5 Dodgers 4 final",
-                    "Dodgers drop Game 2 against the Giants, 5-4",
-                    "Blue Jays 2 Red Sox 1 final",
-                    "Red Sox lost to the Blue Jays, 2-1",
-                    "Blue Jays at Red Sox is over. Score: 2-1",
-                    "Phillies win over the Braves, 5-0",
-                    "Phillies 5 Braves 0 final",
-                    "Final: Braves lose to the Phillies in the series opener, 5-0",
-                    "Final score: Flyers 4 Lightning 1",
-                    "Flyers 4 Lightning 1 final",
-                    "Flyers win 4-1"];
-
-    let documents: Vec<Section> = sections.iter().enumerate().map(|(i, x)| {
-        Section { id: i as i32, text: x.to_string() }
-    }).collect();
+    let data = ["Giants hit 3 HRs to down Dodgers",
+                "Giants 5 Dodgers 4 final",
+                "Dodgers drop Game 2 against the Giants, 5-4",
+                "Blue Jays 2 Red Sox 1 final",
+                "Red Sox lost to the Blue Jays, 2-1",
+                "Blue Jays at Red Sox is over. Score: 2-1",
+                "Phillies win over the Braves, 5-0",
+                "Phillies 5 Braves 0 final",
+                "Final: Braves lose to the Phillies in the series opener, 5-0",
+                "Final score: Flyers 4 Lightning 1",
+                "Flyers 4 Lightning 1 final",
+                "Flyers win 4-1"];
 
     // Run series of questions
     let questions = ["What team won the game?", "What was score?"];
@@ -34,7 +30,7 @@ pub async fn extractor() -> Result<(), Box<dyn Error>> {
             Question { name: question.to_string(), query: query.to_string(), question: question.to_string(), snippet: false }
         }).collect();
 
-        for answer in extractor.extract(&documents, &queue).await? {
+        for answer in extractor.extract(&queue, &data.to_vec()).await? {
             println!("{}", answer);
         }
         println!();
@@ -45,7 +41,7 @@ pub async fn extractor() -> Result<(), Box<dyn Error>> {
 
     println!("----{}----", question);
     let queue = vec![Question {name: question.to_string(), query: question.to_string(), question: question.to_string(), snippet: false}];
-    for answer in extractor.extract(&documents, &queue).await? {
+    for answer in extractor.extract(&queue, &data.to_vec()).await? {
         println!("{}", answer)
     }
 

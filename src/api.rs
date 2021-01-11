@@ -3,9 +3,10 @@ use serde::Deserialize;
 use serde_json::Value;
 use std::error::Error;
 
+// Generic return types
 pub type APIResponse = Result<Response, Box<dyn Error>>;
-pub type APIScores = Result<Vec<Score>, Box<dyn Error>>;
-pub type APIValues = Result<Vec<f32>, Box<dyn Error>>;
+pub type IndexResults = Result<Vec<IndexResult>, Box<dyn Error>>;
+pub type IndexResultsBatch = Result<Vec<Vec<IndexResult>>, Box<dyn Error>>;
 
 /// Base API definition
 pub struct API {
@@ -57,9 +58,9 @@ impl API {
     }
 }
 
-/// API score
+// Index result
 #[derive(Debug, Deserialize)]
-pub struct Score {
-    pub id: String,
+pub struct IndexResult {
+    pub id: usize,
     pub score: f32
 }
