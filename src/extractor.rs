@@ -25,7 +25,7 @@ impl Extractor {
      /// Extracts answers to input questions.
      /// 
      /// # Arguments
-     /// * `queue` -  list of {name: value, query: value, question: value, snippet: value)
+     /// * `queue` -  list of {name: value, query: value, question: value, snippet: value}
      /// * `texts` - list of texts
     pub async fn extract(&self, queue: &Vec<Question>, texts: &Vec<&str>) -> Answers {
         // Post parameters

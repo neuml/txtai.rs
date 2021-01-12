@@ -20,7 +20,7 @@ impl Labels {
     }
 
     /// Applies a zero shot classifier to text using a list of labels. Returns a list of
-    /// (id, score) sorted by highest score, where id is the index in labels.
+    /// {id: value, score: value} sorted by highest score, where id is the index in labels.
     ///
     /// # Arguments
     /// * `text` - input text
@@ -34,7 +34,8 @@ impl Labels {
     }
 
     /// Applies a zero shot classifier to list of text using a list of labels. Returns a list of
-    /// (id, score) sorted by highest score, where id is the index in labels.
+    /// {id: value, score: value} sorted by highest score, where id is the index in labels per
+    /// text element.
     ///
     /// # Arguments
     /// * `texts` - list of texts

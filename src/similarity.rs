@@ -20,7 +20,8 @@ impl Similarity {
     }
 
     /// Computes the similarity between query and list of text. Returns a list of
-    /// (id, score) sorted by highest score, where id is the index in texts.
+    /// {id: value, score: value} sorted by highest score, where id is the index
+    /// in texts.
     ///
     /// # Arguments
     /// * `query` - query text
@@ -34,7 +35,8 @@ impl Similarity {
     }
 
     /// Computes the similarity between list of queries and list of text. Returns a list
-    /// of (id, score) sorted by highest score per query, where id is the index in texts.
+    /// of {id: value, score: value} sorted by highest score per query, where id is the
+    /// index in texts.
     ///
     /// # Arguments
     /// * `queries` - queries text

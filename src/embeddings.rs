@@ -36,8 +36,8 @@ impl Embeddings {
     }
 
     /// Finds documents in the embeddings model most similar to the input query. Returns
-    /// a list of (id, score) sorted by highest score, where id is the document id in
-    /// the embeddings model.
+    /// a list of {id: value, score: value} sorted by highest score, where id is the
+    /// document id in the embeddings model.
     /// 
     /// # Arguments
     /// * `query` - query text
@@ -48,8 +48,8 @@ impl Embeddings {
     }
 
     /// Finds documents in the embeddings model most similar to the input queries. Returns
-    /// a list of (id, score) sorted by highest score per query, where id is the document id
-    /// in the embeddings model.
+    /// a list of {id: value, score: value} sorted by highest score per query, where id is
+    /// the document id in the embeddings model.
     ///
     /// # Arguments
     /// * `queries` - queries text
@@ -79,7 +79,8 @@ impl Embeddings {
     }
 
     /// Computes the similarity between query and list of text. Returns a list of
-    /// (id, score) sorted by highest score, where id is the index in texts.
+    /// {id: value, score: value} sorted by highest score, where id is the index
+    /// in texts.
     ///
     /// # Arguments
     /// * `query` - query text
@@ -93,7 +94,8 @@ impl Embeddings {
     }
 
     /// Computes the similarity between list of queries and list of text. Returns a list
-    /// of (id, score) sorted by highest score per query, where id is the index in texts.
+    /// of {id: value, score: value} sorted by highest score per query, where id is the
+    /// index in texts.
     ///
     /// # Arguments
     /// * `queries` - queries text
@@ -110,21 +112,21 @@ impl Embeddings {
     /// 
     /// # Arguments
     /// * `text` - input text
-    pub async fn embeddings(&self, text: &str) -> Embedding {
+    pub async fn transform(&self, text: &str) -> Embedding {
         // Query parameters
         let params = [("text", text)];
 
         // Execute API call
-        Ok(self.api.get("embeddings", &params).await?.json().await?)
+        Ok(self.api.get("transform", &params).await?.json().await?)
     }
 
     /// Transforms list of text into embeddings arrays.
     ///
     /// # Arguments
     /// * `texts` - lists of text
-    pub async fn batchembeddings(&self, texts: &str) -> EmbeddingBatch {
+    pub async fn batchtransform(&self, texts: &str) -> EmbeddingBatch {
         // Execute API call
-        Ok(self.api.post("batchembeddings", &json!(texts)).await?.json().await?)
+        Ok(self.api.post("batchtransform", &json!(texts)).await?.json().await?)
     }
 }
 
