@@ -12,7 +12,7 @@ pub struct Embeddings {
 /// Embeddings implementation
 impl Embeddings {
     /// Creates an Embeddings instance.
-    /// 
+    ///
     /// # Arguments
     /// * `url` - base url of txtai API
     pub fn new(url: &str) -> Embeddings {

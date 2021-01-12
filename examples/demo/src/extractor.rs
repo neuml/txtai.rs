@@ -3,7 +3,7 @@ use std::error::Error;
 use txtai::extractor::{Extractor, Question};
 
 /// Example extractor functionality.
-/// 
+///
 /// Implements logic found in this notebook: https://github.com/neuml/txtai/blob/master/examples/05_Extractive_QA_with_txtai.ipynb
 pub async fn extractor() -> Result<(), Box<dyn Error>> {
     let extractor = Extractor::new("http://localhost:8000");

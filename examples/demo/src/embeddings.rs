@@ -3,7 +3,7 @@ use std::error::Error;
 use txtai::embeddings::{Document, Embeddings};
 
 /// Example embeddings functionality.
-/// 
+///
 /// Implements functionality found in this notebook: https://github.com/neuml/txtai/blob/master/examples/01_Introducing_txtai.ipynb
 pub async fn embeddings() -> Result<(), Box<dyn Error>> {
     let embeddings = Embeddings::new("http://localhost:8000");

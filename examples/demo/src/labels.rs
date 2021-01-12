@@ -3,7 +3,7 @@ use std::error::Error;
 use txtai::labels::Labels;
 
 /// Example labels functionality.
-/// 
+///
 /// Implements logic found in this notebook: https://github.com/neuml/txtai/blob/master/examples/07_Apply_labels_with_zero_shot_classification.ipynb
 pub async fn labels() -> Result<(), Box<dyn Error>> {
     let labels = Labels::new("http://localhost:8000");

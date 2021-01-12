@@ -10,7 +10,7 @@ pub struct Similarity {
 /// Similarity implementation
 impl Similarity {
     /// Creates a Similarity instance.
-    /// 
+    ///
     /// # Arguments
     /// * `url` - base url of txtai API
     pub fn new(url: &str) -> Similarity {
