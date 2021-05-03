@@ -5,7 +5,7 @@
 [![GitHub issues](https://img.shields.io/github/issues/neuml/txtai.rs.svg?style=flat&color=success)](https://github.com/neuml/txtai.rs/issues)
 [![GitHub last commit](https://img.shields.io/github/last-commit/neuml/txtai.rs.svg?style=flat&color=blue)](https://github.com/neuml/txtai.rs)
 
-[txtai](https://github.com/neuml/txtai) builds an AI-powered index over sections of text. txtai supports building text indices to perform similarity searches and create extractive question-answering based systems. txtai also has functionality for zero-shot classification.
+[txtai](https://github.com/neuml/txtai) executes machine-learning workflows to transform data and build AI-powered text indices to perform similarity search.
 
 This repository contains Rust bindings for the txtai API. Full txtai functionality is supported.
 
@@ -15,7 +15,7 @@ Add the following lines to your project `Cargo.toml` file:
 
 ```toml
 [dependencies]
-txtai = { version = "2.0" }
+txtai = { version = "3.0" }
 tokio = { version = "0.2", features = ["full"] }
 ```
 
@@ -29,6 +29,7 @@ The examples directory has a series of examples that give an overview of txtai. 
 | [Introducing txtai](https://github.com/neuml/txtai.rs/blob/master/examples/demo/src/embeddings.rs) | Overview of the functionality provided by txtai |
 | [Extractive QA with txtai](https://github.com/neuml/txtai.rs/blob/master/examples/demo/src/extractor.rs) | Extractive question-answering with txtai |
 | [Labeling with zero-shot classification](https://github.com/neuml/txtai.rs/blob/master/examples/demo/src/labels.rs) | Labeling with zero-shot classification |
+| [Pipelines and workflows](https://github.com/neuml/txtai.rs/blob/master/examples/demo/src/pipelines.rs) | Pipelines and workflows |
 
 txtai.rs connects to a txtai api instance. See [this link](https://github.com/neuml/txtai#api) for details on how to start a new api instance.
 
