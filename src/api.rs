@@ -1,3 +1,4 @@
+use enum_as_inner::EnumAsInner;
 use reqwest::Response;
 use serde::Deserialize;
 use serde_json::Value;
@@ -7,6 +8,8 @@ use std::error::Error;
 pub type APIResponse = Result<Response, Box<dyn Error>>;
 pub type IndexResults = Result<Vec<IndexResult>, Box<dyn Error>>;
 pub type IndexResultsBatch = Result<Vec<Vec<IndexResult>>, Box<dyn Error>>;
+pub type Texts = Result<Text, Box<dyn Error>>;
+pub type TextsBatch = Result<Vec<Text>, Box<dyn Error>>;
 
 /// Base API definition
 pub struct API {
@@ -63,4 +66,12 @@ impl API {
 pub struct IndexResult {
     pub id: usize,
     pub score: f32
+}
+
+// Text result that handles String and Vector of Strings
+#[derive(Debug, Deserialize, EnumAsInner)]
+#[serde(untagged)]
+pub enum Text {
+    String(String),
+    List(Vec<String>)
 }
