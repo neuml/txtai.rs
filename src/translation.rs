@@ -1,6 +1,6 @@
 use serde_json::json;
 
-pub use crate::api::{API, Texts, TextsBatch};
+pub use crate::api::{API, Strings, StringsBatch};
 
 /// Translation definition
 pub struct Translation {
@@ -25,7 +25,7 @@ impl Translation {
     /// * `text` text to translate
     /// * `target` target language code, defaults to "en"
     /// * `source` source language code, detects language if not provided
-    pub async fn translate(&self, text: &str, target: Option<&str>, source: Option<&str>) -> Texts {
+    pub async fn translate(&self, text: &str, target: Option<&str>, source: Option<&str>) -> Strings {
         // Query parameters
         let mut params = vec![("text", text)];
 
@@ -49,7 +49,7 @@ impl Translation {
     /// * `texts` list of text to translate
     /// * `target` target language code, defaults to "en"
     /// * `source` source language code, detects language if not provided
-    pub async fn batchtranslate(&self, texts: &Vec<&str>, target: Option<&str>, source: Option<&str>) -> TextsBatch {
+    pub async fn batchtranslate(&self, texts: &Vec<&str>, target: Option<&str>, source: Option<&str>) -> StringsBatch {
         // Post parameters
         let params = json!({
             "text": texts,

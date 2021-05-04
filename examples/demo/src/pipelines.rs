@@ -33,13 +33,13 @@ pub async fn pipelines() -> Result<(), Box<dyn Error>> {
     println!("{:?}", summarytext);
 
     let translate = Translation::new(service);
-    let translation = translate.translate(summarytext.as_string().unwrap(), Some("es"), None).await?;
+    let translation = translate.translate(&summarytext, Some("es"), None).await?;
 
     println!("\n---- Summary Text in Spanish ----");
     println!("{:?}", translation);
 
     let workflow = Workflow::new(service);
-    let output = workflow.workflow("sumspanish", &vec![&text.as_string().unwrap()]).await?;
+    let output = workflow.workflow("sumspanish", &vec!["file:///tmp/txtai/article.pdf"]).await?;
 
     println!("\n---- Workflow [Extract Text->Summarize->Translate] ----");
     println!("{:?}", output);

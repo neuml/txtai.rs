@@ -1,6 +1,6 @@
 use serde_json::json;
 
-pub use crate::api::{API, Texts, TextsBatch};
+pub use crate::api::{API, Strings, StringsBatch};
 
 /// Summary definition
 pub struct Summary {
@@ -25,7 +25,7 @@ impl Summary {
     /// * `text` text to summarize
     /// * `minlength` minimum length for summary
     /// * `maxlength` maximum length for summary
-    pub async fn summary(&self, text: &str, minlength: Option<i32>, maxlength: Option<i32>) -> Texts {
+    pub async fn summary(&self, text: &str, minlength: Option<i32>, maxlength: Option<i32>) -> Strings {
         // Query parameters
         let mut params = vec![("text", text)];
 
@@ -49,7 +49,7 @@ impl Summary {
     /// * `texts` list of text to summarize
     /// * `minlength` minimum length for summary
     /// * `maxlength` maximum length for summary
-    pub async fn batchsummary(&self, texts: &Vec<&str>, minlength: Option<i32>, maxlength: Option<i32>) -> TextsBatch {
+    pub async fn batchsummary(&self, texts: &Vec<&str>, minlength: Option<i32>, maxlength: Option<i32>) -> StringsBatch {
         // Post parameters
         let params = json!({
             "text": texts,

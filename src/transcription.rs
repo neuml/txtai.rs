@@ -1,6 +1,6 @@
 use serde_json::json;
 
-pub use crate::api::{API, Texts, TextsBatch};
+pub use crate::api::{API, Strings, StringsBatch};
 
 /// Transcription definition
 pub struct Transcription {
@@ -22,7 +22,7 @@ impl Transcription {
     /// Transcribes audio files to text.
     ///
     /// `file` file to transcribe
-    pub async fn transcribe(&self, file: &str) -> Texts {
+    pub async fn transcribe(&self, file: &str) -> Strings {
         // Query parameters
         let params = [("file", file)];
 
@@ -33,7 +33,7 @@ impl Transcription {
     /// Transcribes audio files to text.
     ///
     /// `files` list of files to transcribe
-    pub async fn batchtranscribe(&self, files: &Vec<&str>) -> TextsBatch {
+    pub async fn batchtranscribe(&self, files: &Vec<&str>) -> StringsBatch {
         // Post parameters
         let params = json!(files);
 

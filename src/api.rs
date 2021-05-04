@@ -8,6 +8,8 @@ use std::error::Error;
 pub type APIResponse = Result<Response, Box<dyn Error>>;
 pub type IndexResults = Result<Vec<IndexResult>, Box<dyn Error>>;
 pub type IndexResultsBatch = Result<Vec<Vec<IndexResult>>, Box<dyn Error>>;
+pub type Strings = Result<String, Box<dyn Error>>;
+pub type StringsBatch = Result<Vec<String>, Box<dyn Error>>;
 pub type Texts = Result<Text, Box<dyn Error>>;
 pub type TextsBatch = Result<Vec<Text>, Box<dyn Error>>;
 
