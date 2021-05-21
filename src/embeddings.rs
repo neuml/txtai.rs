@@ -71,11 +71,30 @@ impl Embeddings {
         Ok(self.api.post("add", &json!(documents)).await?)
     }
 
-    /// Builds an embeddings index for previously batched documents. No further documents can be added
-    /// after this call.
+    /// Builds an embeddings index for previously batched documents.
     pub async fn index(&self) -> APIResponse {
         // Execute API call
         Ok(self.api.get("index", &[]).await?)
+    }
+
+    /// Runs an embeddings upsert operation for previously batched documents.
+    pub async fn upsert(&self) -> APIResponse {
+        // Execute API call
+        Ok(self.api.get("upsert", &[]).await?)
+    }
+
+     /// Deletes from an embeddings index. Returns list of ids deleted.
+     ///
+     /// # Arguments
+     /// * `ids` - list of ids to delete
+    pub async fn delete(&self, ids: &Vec<&str>) -> Ids {
+        // Execute API call
+        Ok(self.api.post("delete", &json!(ids)).await?.json().await?)
+    }
+
+    /// Total number of elements in this embeddings index.
+    pub async fn count(&self) -> Count {
+        Ok(self.api.get("count", &[]).await?.json().await?)
     }
 
     /// Computes the similarity between query and list of text. Returns a list of
@@ -133,6 +152,8 @@ impl Embeddings {
 // Embeddings return types
 pub type Embedding = Result<Vec<f32>, Box<dyn Error>>;
 pub type EmbeddingBatch = Result<Vec<Vec<f32>>, Box<dyn Error>>;
+pub type Ids = Result<Vec<String>, Box<dyn Error>>;
+pub type Count = Result<usize, Box<dyn Error>>;
 pub type SearchResults = Result<Vec<SearchResult>, Box<dyn Error>>;
 pub type SearchResultsBatch = Result<Vec<Vec<SearchResult>>, Box<dyn Error>>;
 
