@@ -10,5 +10,5 @@ txtai demo in Rust
 edition = "2018"
 
 [dependencies]
-txtai = { version = "3.1"}
+txtai = { version = "3.2"}
 tokio = { version = "0.2", features = ["full"] }

@@ -23,7 +23,7 @@ pub async fn embeddings() -> Result<(), Box<dyn Error>> {
     println!("{:<20} {}", "Query", "Best Match");
     println!("{}", "-".repeat(50));
 
-    for query in ["feel good story", "climate change", "health", "war", "wildlife", "asia", "north america", "dishonest junk"].iter() {
+    for query in ["feel good story", "climate change", "public health story", "war", "wildlife", "asia", "lucky", "dishonest junk"].iter() {
         let results = embeddings.similarity(query, &data.to_vec()).await?;
         let uid = results[0].id;
 
@@ -37,13 +37,13 @@ pub async fn embeddings() -> Result<(), Box<dyn Error>> {
     println!("{:<20} {}", "Query", "Best Match");
     println!("{}", "-".repeat(50));
 
-    for query in ["feel good story", "climate change", "health", "war", "wildlife", "asia", "north america", "dishonest junk"].iter() {
+    for query in ["feel good story", "climate change", "public health story", "war", "wildlife", "asia", "lucky", "dishonest junk"].iter() {
         let results = embeddings.search(query, 1).await?;
         let uid: usize = results[0].id.parse()?;
         println!("{:<20} {}", query, data[uid]);
     }
 
-    data[0] = "Feel good story: baby panda born";
+    data[0] = "See it: baby panda born";
 
     let updates: Vec<Document> = vec![Document {id: "0".to_string(), text: data[0].to_string()}];
     embeddings.delete(&["5"].to_vec()).await?;
