@@ -1,6 +1,6 @@
 [package]
 name = "demo"
-version = "3.7.0"
+version = "4.0.0"
 authors = ["NeuML"]
 license = "Apache-2.0"
 readme = "README.md"
@@ -10,5 +10,5 @@ txtai demo in Rust
 edition = "2018"
 
 [dependencies]
-txtai = { version = "3.7"}
+txtai = { version = "4.0"}
 tokio = { version = "0.2", features = ["full"] }
