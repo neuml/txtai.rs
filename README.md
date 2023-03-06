@@ -15,7 +15,7 @@ Add the following lines to your project `Cargo.toml` file:
 
 ```toml
 [dependencies]
-txtai = { version = "5.3" }
+txtai = { version = "5.4" }
 tokio = { version = "0.2", features = ["full"] }
 ```
 
