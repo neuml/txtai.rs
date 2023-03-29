@@ -8,7 +8,7 @@ repository = "https://github.com/neuml/txtai.rs"
 documentation = "https://github.com/neuml/txtai.rs"
 homepage = "https://github.com/neuml/txtai.rs"
 description = """
-Build AI-powered semantic search applications in Rust
+Semantic search and workflows in Rust
 """
 keywords = ["search", "nlp", "machine-learning", "similarity"]
 categories = ["algorithms", "api-bindings", "text-processing"]
