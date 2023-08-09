@@ -1,13 +1,29 @@
-# txtai: Semantic search and workflows in Rust
+<p align="center">
+    <img src="https://raw.githubusercontent.com/neuml/txtai/master/logo.png"/>
+</p>
 
-[![Version](https://img.shields.io/github/release/neuml/txtai.rs.svg?style=flat&color=success)](https://github.com/neuml/txtai.rs/releases)
-[![GitHub Release Date](https://img.shields.io/github/release-date/neuml/txtai.rs.svg?style=flat&color=blue)](https://github.com/neuml/txtai.rs/releases)
-[![GitHub issues](https://img.shields.io/github/issues/neuml/txtai.rs.svg?style=flat&color=success)](https://github.com/neuml/txtai.rs/issues)
-[![GitHub last commit](https://img.shields.io/github/last-commit/neuml/txtai.rs.svg?style=flat&color=blue)](https://github.com/neuml/txtai.rs)
+<p align="center">
+    <b>Rust client for txtai</b>
+</p>
 
-[txtai](https://github.com/neuml/txtai) is an open-source platform for semantic search and workflows powered by language models.
+<p align="center">
+    <a href="https://github.com/neuml/txtai.rs/releases">
+        <img src="https://img.shields.io/github/release/neuml/txtai.rs.svg?style=flat&color=success" alt="Version"/>
+    </a>
+    <a href="https://github.com/neuml/txtai.rs/releases">
+        <img src="https://img.shields.io/github/release-date/neuml/txtai.rs.svg?style=flat&color=blue" alt="GitHub Release Date"/>
+    </a>
+    <a href="https://github.com/neuml/txtai.rs/issues">
+        <img src="https://img.shields.io/github/issues/neuml/txtai.rs.svg?style=flat&color=success" alt="GitHub Issues"/>
+    </a>
+    <a href="https://github.com/neuml/txtai.rs">
+        <img src="https://img.shields.io/github/last-commit/neuml/txtai.rs.svg?style=flat&color=blue" alt="GitHub Last Commit"/>
+    </a>
+</p>
 
-This repository contains Rust bindings for the txtai API. Full txtai functionality is supported.
+[txtai](https://github.com/neuml/txtai) is an all-in-one embeddings database for semantic search, LLM orchestration and language model workflows.
+
+This repository contains Rust bindings for the txtai API.
 
 ## Installation
 
@@ -15,7 +31,7 @@ Add the following lines to your project `Cargo.toml` file:
 
 ```toml
 [dependencies]
-txtai = { version = "5.5" }
+txtai = { version = "6.0" }
 tokio = { version = "0.2", features = ["full"] }
 ```
 
@@ -31,7 +47,7 @@ The examples directory has a series of examples that give an overview of txtai. 
 | [Labeling with zero-shot classification](https://github.com/neuml/txtai.rs/blob/master/examples/demo/src/labels.rs) | Labeling with zero-shot classification |
 | [Pipelines and workflows](https://github.com/neuml/txtai.rs/blob/master/examples/demo/src/pipelines.rs) | Pipelines and workflows |
 
-txtai.rs connects to a txtai api instance. See [this link](https://github.com/neuml/txtai#api) for details on how to start a new api instance.
+txtai.rs connects to a txtai api instance. See [this link](https://neuml.github.io/txtai/api/) for details on how to start a new api instance.
 
 Once an api instance is running, do the following to run the examples.
 
