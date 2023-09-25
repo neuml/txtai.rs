@@ -38,7 +38,7 @@ pub async fn embeddings() -> Result<(), Box<dyn Error>> {
     println!("{}", "-".repeat(50));
 
     for query in ["feel good story", "climate change", "public health story", "war", "wildlife", "asia", "lucky", "dishonest junk"].iter() {
-        let results = embeddings.search(query, 1).await?;
+        let results = embeddings.search(query, 1, None, None).await?;
         let uid: usize = results[0].id.parse()?;
         println!("{:<20} {}", query, data[uid]);
     }
@@ -55,7 +55,7 @@ pub async fn embeddings() -> Result<(), Box<dyn Error>> {
     println!("{}", "-".repeat(50));
 
     let query = "feel good story";
-    let results = embeddings.search(query, 1).await?;
+    let results = embeddings.search(query, 1, None, None).await?;
     let uid: usize = results[0].id.parse()?;
     println!("{:<20} {}", query, data[uid]);
 

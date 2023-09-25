@@ -1,5 +1,6 @@
 use serde::{Deserialize, Serialize};
 use serde_json::json;
+use std::collections::HashMap;
 use std::error::Error;
 
 pub use crate::api::{API, APIResponse, IndexResults, IndexResultsBatch};
@@ -27,9 +28,25 @@ impl Embeddings {
     /// # Arguments
     /// * `query` - query text
     /// * `limit` - maximum results
-    pub async fn query(&self, query: &str, limit: i32) -> APIResponse {
+    /// * `weights` - hybrid score weights, if applicable
+    /// * `index` - index name, if applicable
+    pub async fn query(&self, query: &str, limit: i32, weights: Option<f32>, index: Option<&str>) -> APIResponse {
         // Query parameters
-        let params = [("query", query), ("limit", &limit.to_string())];
+        let mut params = vec![("query", query)];
+
+        let limitl = limit.to_string();
+        let weightsl = weights.unwrap_or(-1.0).to_string();
+        let indexl = index.unwrap_or("").to_string();
+
+        if limitl != "" {
+            params.push(("limit", &limitl));
+        }
+        if weightsl != "-1.0" {
+            params.push(("weights", &weightsl));
+        }
+        if indexl != "" {
+            params.push(("index", &indexl));
+        }
 
         // Execute API call
         Ok(self.api.get("search", &params).await?)
@@ -42,9 +59,11 @@ impl Embeddings {
     /// # Arguments
     /// * `query` - query text
     /// * `limit` - maximum results
-    pub async fn search(&self, query: &str, limit: i32) -> SearchResults {
+    /// * `weights` - hybrid score weights, if applicable
+    /// * `index` - index name, if applicable
+    pub async fn search(&self, query: &str, limit: i32, weights: Option<f32>, index: Option<&str>) -> SearchResults {
         // Execute API call and map JSON
-        Ok(self.query(query, limit).await?.json().await?)
+        Ok(self.query(query, limit, weights, index).await?.json().await?)
     }
 
     /// Finds documents in the embeddings model most similar to the input queries. Returns
@@ -54,9 +73,16 @@ impl Embeddings {
     /// # Arguments
     /// * `queries` - queries text
     /// * `limit` - maximum results
-    pub async fn batchsearch(&self, queries: &str, limit: i32) -> SearchResultsBatch {
+    /// * `weights` - hybrid score weights, if applicable
+    /// * `index` - index name, if applicable
+    pub async fn batchsearch(&self, queries: &Vec<&str>, limit: i32, weights: Option<f32>, index: Option<&str>) -> SearchResultsBatch {
         // Post parameters
-        let params = json!({"queries": queries, "limit": limit});
+        let params = json!({
+            "queries": queries,
+            "limit": limit,
+            "weights": weights,
+            "index": index
+        });
 
         // Execute API call
         Ok(self.api.post("batchsearch", &params).await?.json().await?)
@@ -90,6 +116,18 @@ impl Embeddings {
     pub async fn delete(&self, ids: &Vec<&str>) -> Ids {
         // Execute API call
         Ok(self.api.post("delete", &json!(ids)).await?.json().await?)
+    }
+
+    /// Recreates this embeddings index using config. This method only works if document content storage is enabled.
+    pub async fn reindex(&self, config: HashMap<&str, &str>, function: Option<&str>) -> APIResponse {
+        // Post parameters
+        let params = json!({
+            "config": config,
+            "function": function
+        });
+
+        // Execute API call
+        Ok(self.api.post("reindex", &params).await?)
     }
 
     /// Total number of elements in this embeddings index.
