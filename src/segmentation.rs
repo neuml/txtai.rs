@@ -10,12 +10,31 @@ pub struct Segmentation {
 /// Segmentation implementation
 impl Segmentation {
     /// Creates a Segmentation instance.
-    ///
+    /// 
+    pub fn new() -> Segmentation {
+        Segmentation { 
+            api: API::new()
+        }
+    }
+
+    /// Creates a Segmentation instance.
+    /// 
     /// # Arguments
-    /// * `url` - base url of txtai API
-    pub fn new(url: &str) -> Segmentation {
+    /// * `url` - API url
+    pub fn with_url(url: &str) -> Segmentation {
         Segmentation {
-            api: API::new(url)
+            api: API::with_url(url) 
+        }
+    }
+
+    /// Creates a Segmentation instance.
+    /// 
+    /// # Arguments
+    /// * `url` - API url
+    /// * `token` - API token
+    pub fn with_url_token(url: &str, token: &str) -> Segmentation {
+        Segmentation {
+            api: API::with_url_token(url, token)
         }
     }
 

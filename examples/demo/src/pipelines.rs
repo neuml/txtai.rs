@@ -13,38 +13,38 @@ use txtai::workflow::Workflow;
 pub async fn pipelines() -> Result<(), Box<dyn Error>> {
     let service = "http://localhost:8000";
 
-    let segment = Segmentation::new(service);
+    let segment = Segmentation::with_url(service);
 
     let sentences = "This is a test. And another test.";
 
     println!("---- Segmented Text ----");
     println!("{:?}", segment.segment(sentences).await?);
 
-    let textractor = Textractor::new(service);
+    let textractor = Textractor::with_url(service);
     let text = textractor.textract("/tmp/txtai/article.pdf").await?;
 
     println!("\n---- Extracted Text ----");
     println!("{:?}", text);
 
-    let summary = Summary::new(service);
+    let summary = Summary::with_url(service);
     let summarytext = summary.summary(text.as_string().unwrap(), None, None).await?;
 
     println!("\n---- Summary Text ----");
     println!("{:?}", summarytext);
 
-    let translate = Translation::new(service);
+    let translate = Translation::with_url(service);
     let translation = translate.translate(&summarytext, Some("es"), None).await?;
 
     println!("\n---- Summary Text in Spanish ----");
     println!("{:?}", translation);
 
-    let workflow = Workflow::new(service);
+    let workflow = Workflow::with_url(service);
     let output = workflow.workflow("sumspanish", &vec!["file:///tmp/txtai/article.pdf"]).await?;
 
     println!("\n---- Workflow [Extract Text->Summarize->Translate] ----");
     println!("{:?}", output);
 
-    let transcribe = Transcription::new(service);
+    let transcribe = Transcription::with_url(service);
     let transcription = transcribe.transcribe("/tmp/txtai/Make_huge_profits.wav").await?;
 
     println!("\n---- Transcribed Text ----");

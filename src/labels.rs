@@ -11,11 +11,30 @@ pub struct Labels {
 impl Labels {
     /// Creates a Labels instance.
     /// 
+    pub fn new() -> Labels {
+        Labels { 
+            api: API::new()
+        }
+    }
+
+    /// Creates a Labels instance.
+    /// 
     /// # Arguments
-    /// * `url` - base url of txtai API
-    pub fn new(url: &str) -> Labels {
+    /// * `url` - API url
+    pub fn with_url(url: &str) -> Labels {
         Labels {
-            api: API::new(url)
+            api: API::with_url(url) 
+        }
+    }
+
+    /// Creates a Labels instance.
+    /// 
+    /// # Arguments
+    /// * `url` - API url
+    /// * `token` - API token
+    pub fn with_url_token(url: &str, token: &str) -> Labels {
+        Labels {
+            api: API::with_url_token(url, token)
         }
     }
 

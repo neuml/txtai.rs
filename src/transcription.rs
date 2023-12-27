@@ -10,12 +10,31 @@ pub struct Transcription {
 /// Transcription implementation
 impl Transcription {
     /// Creates a Transcription instance.
-    ///
+    /// 
+    pub fn new() -> Transcription {
+        Transcription { 
+            api: API::new()
+        }
+    }
+
+    /// Creates an Transcription instance.
+    /// 
     /// # Arguments
-    /// * `url` - base url of txtai API
-    pub fn new(url: &str) -> Transcription {
+    /// * `url` - API url
+    pub fn with_url(url: &str) -> Transcription {
         Transcription {
-            api: API::new(url)
+            api: API::with_url(url) 
+        }
+    }
+
+    /// Creates a Transcription instance.
+    /// 
+    /// # Arguments
+    /// * `url` - API url
+    /// * `token` - API token
+    pub fn with_url_token(url: &str, token: &str) -> Transcription {
+        Transcription {
+            api: API::with_url_token(url, token)
         }
     }
 

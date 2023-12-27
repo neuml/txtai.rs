@@ -6,7 +6,7 @@ use txtai::labels::Labels;
 ///
 /// Implements logic found in this notebook: https://github.com/neuml/txtai/blob/master/examples/07_Apply_labels_with_zero_shot_classification.ipynb
 pub async fn labels() -> Result<(), Box<dyn Error>> {
-    let labels = Labels::new("http://localhost:8000");
+    let labels = Labels::with_url("http://localhost:8000");
 
     let data = ["Dodgers lose again, give up 3 HRs in a loss to the Giants",
                 "Giants 5 Cardinals 4 final in extra innings",

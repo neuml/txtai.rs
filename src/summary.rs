@@ -10,12 +10,31 @@ pub struct Summary {
 /// Summary implementation
 impl Summary {
     /// Creates a Summary instance.
-    ///
+    /// 
+    pub fn new() -> Summary {
+        Summary { 
+            api: API::new()
+        }
+    }
+
+    /// Creates a Summary instance.
+    /// 
     /// # Arguments
-    /// * `url` - base url of txtai API
-    pub fn new(url: &str) -> Summary {
+    /// * `url` - API url
+    pub fn with_url(url: &str) -> Summary {
         Summary {
-            api: API::new(url)
+            api: API::with_url(url) 
+        }
+    }
+
+    /// Creates a Summary instance.
+    /// 
+    /// # Arguments
+    /// * `url` - API url
+    /// * `token` - API token
+    pub fn with_url_token(url: &str, token: &str) -> Summary {
+        Summary {
+            api: API::with_url_token(url, token)
         }
     }
 

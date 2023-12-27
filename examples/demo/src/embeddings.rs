@@ -6,7 +6,7 @@ use txtai::embeddings::{Document, Embeddings};
 ///
 /// Implements functionality found in this notebook: https://github.com/neuml/txtai/blob/master/examples/01_Introducing_txtai.ipynb
 pub async fn embeddings() -> Result<(), Box<dyn Error>> {
-    let embeddings = Embeddings::new("http://localhost:8000");
+    let embeddings = Embeddings::with_url("http://localhost:8000");
 
     let mut data = ["US tops 5 million confirmed virus cases",
                     "Canada's last fully intact ice shelf has suddenly collapsed, forming a Manhattan-sized iceberg",

@@ -10,12 +10,31 @@ pub struct Similarity {
 /// Similarity implementation
 impl Similarity {
     /// Creates a Similarity instance.
-    ///
+    /// 
+    pub fn new() -> Similarity {
+        Similarity { 
+            api: API::new()
+        }
+    }
+
+    /// Creates a Similarity instance.
+    /// 
     /// # Arguments
-    /// * `url` - base url of txtai API
-    pub fn new(url: &str) -> Similarity {
+    /// * `url` - API url
+    pub fn with_url(url: &str) -> Similarity {
         Similarity {
-            api: API::new(url)
+            api: API::with_url(url) 
+        }
+    }
+
+    /// Creates a Similarity instance.
+    /// 
+    /// # Arguments
+    /// * `url` - API url
+    /// * `token` - API token
+    pub fn with_url_token(url: &str, token: &str) -> Similarity {
+        Similarity {
+            api: API::with_url_token(url, token)
         }
     }
 

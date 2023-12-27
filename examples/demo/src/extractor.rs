@@ -6,7 +6,7 @@ use txtai::extractor::{Extractor, Question};
 ///
 /// Implements logic found in this notebook: https://github.com/neuml/txtai/blob/master/examples/05_Extractive_QA_with_txtai.ipynb
 pub async fn extractor() -> Result<(), Box<dyn Error>> {
-    let extractor = Extractor::new("http://localhost:8000");
+    let extractor = Extractor::with_url("http://localhost:8000");
 
     let data = ["Giants hit 3 HRs to down Dodgers",
                 "Giants 5 Dodgers 4 final",

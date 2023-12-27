@@ -14,11 +14,30 @@ pub struct Extractor {
 impl Extractor {
     /// Creates an Extractor instance.
     /// 
+    pub fn new() -> Extractor {
+        Extractor { 
+            api: API::new()
+        }
+    }
+
+    /// Creates an Extractor instance.
+    /// 
     /// # Arguments
-    /// * `url` - base url of txtai API
-    pub fn new(url: &str) -> Extractor {
+    /// * `url` - API url
+    pub fn with_url(url: &str) -> Extractor {
         Extractor {
-            api: API::new(url)
+            api: API::with_url(url) 
+        }
+    }
+
+    /// Creates an API instance.
+    /// 
+    /// # Arguments
+    /// * `url` - API url
+    /// * `token` - API token
+    pub fn with_url_token(url: &str, token: &str) -> Extractor {
+        Extractor {
+            api: API::with_url_token(url, token)
         }
     }
 

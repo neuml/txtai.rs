@@ -10,12 +10,31 @@ pub struct Translation {
 /// Translation implementation
 impl Translation {
     /// Creates a Translation instance.
-    ///
+    /// 
+    pub fn new() -> Translation {
+        Translation { 
+            api: API::new()
+        }
+    }
+
+    /// Creates a Translation instance.
+    /// 
     /// # Arguments
-    /// * `url` - base url of txtai API
-    pub fn new(url: &str) -> Translation {
+    /// * `url` - API url
+    pub fn with_url(url: &str) -> Translation {
         Translation {
-            api: API::new(url)
+            api: API::with_url(url) 
+        }
+    }
+
+    /// Creates a Translation instance.
+    /// 
+    /// # Arguments
+    /// * `url` - API url
+    /// * `token` - API token
+    pub fn with_url_token(url: &str, token: &str) -> Translation {
+        Translation {
+            api: API::with_url_token(url, token)
         }
     }
 

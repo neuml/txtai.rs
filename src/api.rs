@@ -1,7 +1,8 @@
 use enum_as_inner::EnumAsInner;
-use reqwest::Response;
+use reqwest::{RequestBuilder, Response};
 use serde::Deserialize;
 use serde_json::Value;
+use std::env;
 use std::error::Error;
 
 // Generic return types
@@ -15,17 +16,42 @@ pub type TextsBatch = Result<Vec<Text>, Box<dyn Error>>;
 
 /// Base API definition
 pub struct API {
-    url: String
+    url: String,
+    token: String
 }
 
 /// Base API implementation
 impl API {
     /// Creates an API instance.
+    ///
+    pub fn new() -> API {
+        API { 
+            url: env::var("TXTAI_API_URL").unwrap_or(String::from("")),
+            token: env::var("TXTAI_API_TOKEN").unwrap_or(String::from(""))
+        }
+    }
+
+    /// Creates an API instance.
     /// 
     /// # Arguments
-    /// * `url` - base url of txtai API
-    pub fn new(url: &str) -> API {
-        API { url: url.to_string()}
+    /// * `url` - API url
+    pub fn with_url(url: &str) -> API {
+        API { 
+            url: url.to_string(),
+            token: env::var("TXTAI_API_TOKEN").unwrap_or(String::from(""))
+        }
+    }
+
+    /// Creates an API instance.
+    /// 
+    /// # Arguments
+    /// * `url` - API url
+    /// * `token` - API token
+    pub fn with_url_token(url: &str, token: &str) -> API {
+        API { 
+            url: url.to_string(),
+            token: token.to_string()
+        }
     }
 
     /// Executes a GET request. Returns Response.
@@ -37,12 +63,15 @@ impl API {
         // Generate url
         let url = format!("{url}/{method}", url=self.url, method=method);
 
-        // Create client and add query params
+        // Create client
         let client = reqwest::Client::new();
-        let request = client.get(&url).query(&params);
+        let mut request = client.get(&url);
+
+        // Set headers
+        request = self.headers(request);
 
         // Execute API call
-        Ok(request.send().await?)
+        Ok(request.query(&params).send().await?)
     }
 
     /// Executes a POST request. Returns Response.
@@ -54,12 +83,27 @@ impl API {
         // Generate url
         let url = format!("{url}/{method}", url=self.url, method=method);
 
-        // Create client and add json
+        // Create client
         let client = reqwest::Client::new();
-        let request = client.post(&url).json(&json);
+        let mut request = client.post(&url);
+
+        // Set headers
+        request = self.headers(request);
 
         // Execute API call
-        Ok(request.send().await?)
+        Ok(request.json(&json).send().await?)
+    }
+
+    /// Sets headers on a request. 
+    ///
+    /// # Arguments
+    //  * `request` - RequestBuilder
+    pub fn headers(&self, request: RequestBuilder) -> RequestBuilder {
+        // Authorization header
+        if self.token != "" {
+            return request.header("Authorization", format!("Bearer {token}", token=self.token))
+        }
+        return request
     }
 }
 

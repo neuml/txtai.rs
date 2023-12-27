@@ -10,12 +10,31 @@ pub struct Workflow {
 /// Workflow implementation
 impl Workflow {
     /// Creates a Workflow instance.
-    ///
+    /// 
+    pub fn new() -> Workflow {
+        Workflow { 
+            api: API::new()
+        }
+    }
+
+    /// Creates a Workflow instance.
+    /// 
     /// # Arguments
-    /// * `url` - base url of txtai API
-    pub fn new(url: &str) -> Workflow {
+    /// * `url` - API url
+    pub fn with_url(url: &str) -> Workflow {
         Workflow {
-            api: API::new(url)
+            api: API::with_url(url) 
+        }
+    }
+
+    /// Creates a Workflow instance.
+    /// 
+    /// # Arguments
+    /// * `url` - API url
+    /// * `token` - API token
+    pub fn with_url_token(url: &str, token: &str) -> Workflow {
+        Workflow {
+            api: API::with_url_token(url, token)
         }
     }
 

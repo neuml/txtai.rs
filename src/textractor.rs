@@ -10,12 +10,31 @@ pub struct Textractor {
 /// Textractor implementation
 impl Textractor {
     /// Creates a Textractor instance.
-    ///
+    /// 
+    pub fn new() -> Textractor {
+        Textractor { 
+            api: API::new()
+        }
+    }
+
+    /// Creates a Textractor instance.
+    /// 
     /// # Arguments
-    /// * `url` - base url of txtai API
-    pub fn new(url: &str) -> Textractor {
+    /// * `url` - API url
+    pub fn with_url(url: &str) -> Textractor {
         Textractor {
-            api: API::new(url)
+            api: API::with_url(url) 
+        }
+    }
+
+    /// Creates a Textractor instance.
+    /// 
+    /// # Arguments
+    /// * `url` - API url
+    /// * `token` - API token
+    pub fn with_url_token(url: &str, token: &str) -> Textractor {
+        Textractor {
+            api: API::with_url_token(url, token)
         }
     }
 

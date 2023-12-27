@@ -13,12 +13,31 @@ pub struct Embeddings {
 /// Embeddings implementation
 impl Embeddings {
     /// Creates an Embeddings instance.
-    ///
+    /// 
+    pub fn new() -> Embeddings {
+        Embeddings { 
+            api: API::new()
+        }
+    }
+
+    /// Creates an Embeddings instance.
+    /// 
     /// # Arguments
-    /// * `url` - base url of txtai API
-    pub fn new(url: &str) -> Embeddings {
+    /// * `url` - API url
+    pub fn with_url(url: &str) -> Embeddings {
         Embeddings {
-            api: API::new(url)
+            api: API::with_url(url) 
+        }
+    }
+
+    /// Creates an Embeddings instance.
+    /// 
+    /// # Arguments
+    /// * `url` - API url
+    /// * `token` - API token
+    pub fn with_url_token(url: &str, token: &str) -> Embeddings {
+        Embeddings {
+            api: API::with_url_token(url, token)
         }
     }
 
