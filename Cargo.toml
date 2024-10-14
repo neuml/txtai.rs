@@ -1,6 +1,6 @@
 [package]
 name = "txtai"
-version = "7.4.0"
+version = "7.5.0"
 authors = ["NeuML"]
 license = "Apache-2.0"
 readme = "README.md"
