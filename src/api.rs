@@ -1,5 +1,5 @@
 use enum_as_inner::EnumAsInner;
-use reqwest::{RequestBuilder, Response};
+use reqwest::{multipart, RequestBuilder, Response};
 use serde::Deserialize;
 use serde_json::Value;
 use std::env;
@@ -94,7 +94,7 @@ impl API {
         Ok(request.json(&json).send().await?)
     }
 
-    /// Sets headers on a request. 
+    /// Sets headers on a request.
     ///
     /// # Arguments
     //  * `request` - RequestBuilder
@@ -104,6 +104,26 @@ impl API {
             return request.header("Authorization", format!("Bearer {token}", token=self.token))
         }
         return request
+    }
+
+    /// Executes a multipart POST request. Returns Response.
+    ///
+    /// # Arguments
+    /// * `method` - API method
+    /// * `form` - Multipart form data
+    pub async fn post_multipart(&self, method: &str, form: multipart::Form) -> APIResponse {
+        // Generate url
+        let url = format!("{url}/{method}", url=self.url, method=method);
+
+        // Create client
+        let client = reqwest::Client::new();
+        let mut request = client.post(&url);
+
+        // Set headers
+        request = self.headers(request);
+
+        // Execute API call
+        Ok(request.multipart(form).send().await?)
     }
 }
 
