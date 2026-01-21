@@ -1,3 +1,4 @@
+use reqwest::multipart;
 use serde::{Deserialize, Serialize};
 use serde_json::json;
 use std::collections::HashMap;
@@ -203,6 +204,72 @@ impl Embeddings {
     pub async fn batchtransform(&self, texts: &str) -> EmbeddingBatch {
         // Execute API call
         Ok(self.api.post("batchtransform", &json!(texts)).await?.json().await?)
+    }
+
+    /// Adds a batch of binary objects for indexing.
+    ///
+    /// # Arguments
+    /// * `data` - list of binary data
+    /// * `uid` - list of corresponding ids (optional)
+    /// * `field` - optional object field name
+    pub async fn addobject(&self, data: Vec<Vec<u8>>, uid: Option<Vec<&str>>, field: Option<&str>) -> APIResponse {
+        let mut form = multipart::Form::new();
+
+        // Add binary data
+        for (i, bytes) in data.into_iter().enumerate() {
+            let part = multipart::Part::bytes(bytes)
+                .file_name(format!("file{}", i))
+                .mime_str("application/octet-stream")?;
+            form = form.part("data", part);
+        }
+
+        // Add uid values
+        if let Some(ids) = uid {
+            for id in ids {
+                form = form.text("uid", id.to_string());
+            }
+        }
+
+        // Add field
+        if let Some(f) = field {
+            form = form.text("field", f.to_string());
+        }
+
+        // Execute API call
+        Ok(self.api.post_multipart("addobject", form).await?)
+    }
+
+    /// Adds a batch of images for indexing.
+    ///
+    /// # Arguments
+    /// * `data` - list of image data
+    /// * `uid` - list of corresponding ids
+    /// * `field` - optional object field name
+    pub async fn addimage(&self, data: Vec<Vec<u8>>, uid: Option<Vec<&str>>, field: Option<&str>) -> APIResponse {
+        let mut form = multipart::Form::new();
+
+        // Add image data
+        for (i, bytes) in data.into_iter().enumerate() {
+            let part = multipart::Part::bytes(bytes)
+                .file_name(format!("image{}.jpg", i))
+                .mime_str("image/jpeg")?;
+            form = form.part("data", part);
+        }
+
+        // Add uid values
+        if let Some(ids) = uid {
+            for id in ids {
+                form = form.text("uid", id.to_string());
+            }
+        }
+
+        // Add field
+        if let Some(f) = field {
+            form = form.text("field", f.to_string());
+        }
+
+        // Execute API call
+        Ok(self.api.post_multipart("addimage", form).await?)
     }
 }
 
